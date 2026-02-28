@@ -2,6 +2,9 @@ package com.smartshop.main;
 
 import java.util.Scanner;
 
+import com.smartshop.admin.AddProduct;
+import com.smartshop.admin.Login;
+
 public class ShopMain {
 	public static void selectUser() {
 		
@@ -71,7 +74,10 @@ public class ShopMain {
 	
 	public static void AdminChoice() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Please choose an option:");
+		System.out.println("Please Login:");
+		Login login = new Login();
+		login.adminLogin();
+		System.out.println("Select choice");
 		System.out.println("1. Add New Product");
 		System.out.println("2. View Product Stock");
 		System.out.println("3. View Registered Users");
@@ -82,7 +88,10 @@ public class ShopMain {
 		int choice = scanner.nextInt();
 		switch(choice) {
 		
-			case 1:
+			case 1: 		
+				AddProduct addproduct = new AddProduct();
+				addproduct.AddNewProduct();
+				break;
 			case 2:
 			case 3:
 			case 4:
@@ -96,6 +105,7 @@ public class ShopMain {
 		}
 	
 	public static void GuestChoice() {
+		try {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please choose an option:");
 		System.out.println("1. View Products");
@@ -108,6 +118,10 @@ public class ShopMain {
 				case 2:
 				default:
 				}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 	
 	public static void main(String[] args) {

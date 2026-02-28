@@ -11,7 +11,7 @@ public class DBConnection {
     private final static String DB_UNAME = "root";
     private final static String DB_PWD = "root";
 	
-	public Connection getConnection() throws SQLException {
+	public static Connection getConnection() throws SQLException {
 		Connection con = null;
 		try {
 			Class.forName(DB_Driver_Name);
