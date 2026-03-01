@@ -9,6 +9,8 @@ import com.smartshop.admin.PurchaseHistory;
 import com.smartshop.admin.UpdateProductDetails;
 import com.smartshop.admin.ViewProduct;
 import com.smartshop.admin.ViewUsers;
+import com.smartshop.user.UserLogin;
+import com.smartshop.user.Registration;
 
 public class ShopMain {
 	public static void selectUser() {
@@ -76,7 +78,11 @@ public class ShopMain {
 		switch(choice) {
 		
 		case 1:
-		case 2:
+			Registration.registerUser();
+			
+		case 2:		
+			UserLogin.userLogin();
+			
 		case 3:
 		case 4:
 		case 5:

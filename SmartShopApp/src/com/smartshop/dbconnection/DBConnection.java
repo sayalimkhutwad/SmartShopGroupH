@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	
-	private final static String DB_Driver_Name = "com.mysql.cj.jdbc.Driver";
-	private final static String DB_URL = "jdbc:mysql://localhost:3306/smartshop";
-    private final static String DB_UNAME = "root";
-    private final static String DB_PWD = "root";
+	private static final String DB_Driver_Name = "com.mysql.cj.jdbc.Driver";
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/smartshop";
+    private static final String DB_UNAME = "root";
+    private static final String DB_PWD = "root";
 	
 	public static Connection getConnection() throws SQLException {
 		Connection con = null;
