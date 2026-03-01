@@ -10,10 +10,36 @@ public class Registration{
 	public static void registerUser() throws SQLException {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to User Registration");
-		System.out.println("Enter First Name >>");
-		String firstname=scanner.next();
-		System.out.println("Enter Last Name >>");
-		String lastname=scanner.next();		
+		String firstname;
+		while(true){
+		    try{
+		        System.out.println("Enter First Name >>");
+		        firstname = scanner.next();
+
+		        if(!firstname.matches("[A-Za-z]+")){
+		            throw new Exception("First name should contain only alphabets");
+		        }
+		        break;
+		    }
+		    catch(Exception e){
+		        System.out.println(e.getMessage());
+		    }
+		}
+		String lastname;
+		while(true){
+		    try{
+		        System.out.println("Enter Last Name >>");
+		        lastname = scanner.next();
+
+		        if(!lastname.matches("[A-Za-z]+")){
+		            throw new Exception("Last name should contain only alphabets");
+		        }
+		        break;
+		    }
+		    catch(Exception e){
+		        System.out.println(e.getMessage());
+		    }
+		}	
 		String username;
 		while(true){
 		    System.out.println("Enter UserName >>");
@@ -28,13 +54,34 @@ public class Registration{
 		}
 		System.out.println("Enter Password >>");
 		String password=scanner.next();
-		System.out.println("Enter City >>");
-		String city=scanner.next();
+		String city;
+		while(true){
+		    try{
+		        System.out.println("Enter City >>");
+		        city = scanner.next();
+
+		        if(!city.matches("[A-Za-z]+")){
+		            throw new Exception("City should contain only alphabets");
+		        }
+		        break;
+		    }
+		    catch(Exception e){
+		        System.out.println(e.getMessage());
+		    }
+		}
 		System.out.println("Enter Email ID >>");
 		String emailId=scanner.next();
-		System.out.println("Enter Mobile Number >>");
-		double mobileNumber=scanner.nextDouble();
-		
+		double mobileNumber;
+		while(true){
+		    try{
+				System.out.println("Enter Mobile Number >>");
+				mobileNumber=scanner.nextDouble();
+				break;
+		    }
+		    catch(Exception e){
+		        System.out.println(e.getMessage());
+		    }
+		}		
 		InsertOperation_UsersTable.InsertUser(firstname,lastname,username,password,city,emailId,mobileNumber);
 		System.out.println("Successfully registered");
 	}

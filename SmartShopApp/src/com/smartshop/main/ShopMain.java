@@ -4,8 +4,12 @@ import java.util.Scanner;
 
 import com.smartshop.admin.AddProduct;
 import com.smartshop.admin.Login;
+import com.smartshop.classes.SelectOperation_UsersTable;
 import com.smartshop.user.UserLogin;
+import com.smartshop.user.ViewCart;
+import com.smartshop.user.AddProductToCart;
 import com.smartshop.user.Registration;
+import com.smartshop.user.SearchProduct;
 
 public class ShopMain {
 	public static void selectUser() {
@@ -56,21 +60,31 @@ public class ShopMain {
 		System.out.println("7. View Purchase History");
 		System.out.println("8. Exit");
 		int choice = scanner.nextInt();
+		int product_id = 0;
 		try {
 		switch(choice) {
 		
 		case 1:
-			Registration.registerUser();
-			
+			Registration.registerUser();			
 		case 2:		
-			UserLogin.userLogin();
-			
+			UserLogin.userLogin();			
 		case 3:
+//			AddProduct addproduct = new AddProduct();
+//			addproduct.AddNewProduct();
+			SelectOperation_UsersTable.viewProducts();
 		case 4:
+			product_id = SearchProduct.searchProduct();
 		case 5:
+			System.out.println("Enter UserId to add products>>");
+			int user_id= scanner.nextInt();
+			AddProductToCart.addProductToCart(user_id, product_id);
 		case 6:
+			ViewCart.viewCart();
 		case 7:
+			ViewCart.viewCart();
 		case 8:
+			System.out.println("We are at exit...");
+			break;
 		default:
 		}
 		}catch(Exception e) {
