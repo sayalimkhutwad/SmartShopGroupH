@@ -14,7 +14,8 @@ public class Login {
 		if(uname.equals("Admin") && pwd.equals("Admin")) {
 			System.out.println("Logged in Successfully");
 		}else {
-			System.out.println("Login failed");
+			System.out.println("Login failed, please try again");
+			adminLogin();
 		}
 		
 	}
