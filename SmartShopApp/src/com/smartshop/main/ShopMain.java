@@ -1,11 +1,14 @@
 package com.smartshop.main;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.smartshop.admin.AddProduct;
 import com.smartshop.admin.DeleteProducts;
 import com.smartshop.admin.Login;
 import com.smartshop.classes.SelectOperation_UsersTable;
+import com.smartshop.guests.SearchProducts;
+import com.smartshop.guests.ViewProducts;
 import com.smartshop.admin.PurchaseHistory;
 import com.smartshop.admin.UpdateProductDetails;
 import com.smartshop.admin.ViewProduct;
@@ -18,19 +21,19 @@ import com.smartshop.user.SearchProduct;
 
 public class ShopMain {
 	public static void selectUser() {
-		
+
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("*****Welcome to E-Commerce Console Application*****");
 		System.out.println("Select any one user type");
 		System.out.println("1. Login/Register as User");
 		System.out.println("2. Login as Admin");
 		System.out.println("3. Login as Guest");
-		
+
 		try {
 			int usertype = scanner.nextInt();
-			
-			switch(usertype) {
-			
+
+			switch (usertype) {
+
 			case 1:
 				UserChoice();
 				break;
@@ -44,29 +47,27 @@ public class ShopMain {
 			default:
 				System.out.println("Enter valid choice");
 				break;
-			
+
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
 		try {
 			System.out.println("Do you want to continue..?");
 			char ans = scanner.next().charAt(1);
-			if(ans =='y' || ans == 'Y') {
+			if (ans == 'y' || ans == 'Y') {
 				selectUser();
-			}
-			else {
+			} else {
 				System.out.println("Thank you.. keep shopping");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
-	
+
 	public static void UserChoice() {
-		
+
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please choose an option:");
 		System.out.println("1. Register");
@@ -80,43 +81,60 @@ public class ShopMain {
 		int choice = scanner.nextInt();
 		int product_id = 0;
 		try {
-		switch(choice) {
-		
-		case 1:
-			Registration.registerUser();			
-		case 2:		
-			UserLogin.userLogin();			
-		case 3:
+			switch (choice) {
+
+			case 1:
+				Registration.registerUser();
+			case 2:
+				UserLogin.userLogin();
+			case 3:
 //			AddProduct addproduct = new AddProduct();
 //			addproduct.AddNewProduct();
-			SelectOperation_UsersTable.viewProducts();
-		case 4:
-			product_id = SearchProduct.searchProduct();
-		case 5:
-			System.out.println("Enter UserId to add products>>");
-			int user_id= scanner.nextInt();
-			AddProductToCart.addProductToCart(user_id, product_id);
-		case 6:
-			ViewCart.viewCart();
-		case 7:
-			ViewCart.viewCart();
-		case 8:
-			System.out.println("We are at exit...");
-			break;
-		default:
-		}
-		}catch(Exception e) {
+				SelectOperation_UsersTable.viewProducts();
+			case 4:
+				product_id = SearchProduct.searchProduct();
+			case 5:
+				System.out.println("Enter UserId to add products>>");
+				int user_id = scanner.nextInt();
+				AddProductToCart.addProductToCart(user_id, product_id);
+			case 6:
+				ViewCart.viewCart();
+			case 7:
+				ViewCart.viewCart();
+				break;
+				
+			case 8:
+				System.out.println("We are at exit...");
+				break;
+			default:
+			}
+		} catch (Exception e) {
 			System.out.println(e);
 		}
+		System.out.print("Do you want to continue? (y/n): ");
+		char ans = scanner.next().charAt(0);
+
+		if (ans == 'y' || ans == 'Y') {
+			GuestChoice();
+		} else if (ans == 'n' || ans == 'N') {
+
+			selectUser();
+		} else {
+			System.out.println("Please enter valid input...");
+
+			selectUser();
+
+		}
 	}
+
 	public static void LoginAsAdmin() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please Login:");
 		Login login = new Login();
 		login.adminLogin();
-		
+
 	}
-	
+
 	public static void AdminChoice() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Select choice");
@@ -127,10 +145,10 @@ public class ShopMain {
 		System.out.println("5. Update Product Details");
 		System.out.println("6. Delete Product from Inventory");
 		try {
-		int choice = scanner.nextInt();
-		switch(choice) {
-		
-			case 1: 		
+			int choice = scanner.nextInt();
+			switch (choice) {
+
+			case 1:
 				AddProduct addproduct = new AddProduct();
 				addproduct.AddNewProduct();
 				break;
@@ -151,46 +169,89 @@ public class ShopMain {
 				updateproducts.updateProduct();
 				break;
 			case 6:
-				DeleteProducts deleteproducts =new DeleteProducts();
+				DeleteProducts deleteproducts = new DeleteProducts();
 				deleteproducts.deleteProduct();
 			default:
 				System.out.println("Please Enter Correct choice");
-		}
-		}catch(Exception e) {
+			}
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		System.out.println("Do you want to continue as Admin ?");
 		char ans = scanner.next().charAt(0);
-		if(ans == 'y' || ans == 'Y') {
+		if (ans == 'y' || ans == 'Y') {
 			AdminChoice();
-		}else {
+		} else if (ans == 'n' || ans == 'N') {
+
 			selectUser();
-		}
+		} else {
+			System.out.println("Please enter valid input...");
+
+			selectUser();
 
 		}
-	
+
+	}
+
 	public static void GuestChoice() {
-		try {
 		Scanner scanner = new Scanner(System.in);
+
 		System.out.println("Please choose an option:");
 		System.out.println("1. View Products");
 		System.out.println("2. Search Products");
-		int choice = scanner.nextInt();
-		
-		switch(choice) {
-				
-				case 1:
-				case 2:
-				default:
-				}
-		}
-		catch(Exception e) {
-			System.out.println(e);
+		System.out.println("3. Exit");
+
+		while (true) {
+
+			int choice;
+
+			try {
+				choice = scanner.nextInt();
+			} catch (Exception e) {
+				System.out.println("Invalid input! Please enter numbers only.");
+				scanner.nextLine();
+				continue;
+			}
+
+			switch (choice) {
+
+			case 1:
+				ViewProducts viewproducts = new ViewProducts();
+				viewproducts.ViewProductStocks();
+				break;
+
+			case 2:
+				SearchProducts searchproduct = new SearchProducts();
+				searchproduct.searchProduct();
+				break;
+
+			case 3:
+				System.out.println("Returning to Main Menu...");
+				selectUser();
+
+			default:
+				System.out.println("Invalid choice! Enter correct option");
+				continue;
+			}
+			System.out.print("Do you want to continue? (y/n): ");
+			char ans = scanner.next().charAt(0);
+
+			if (ans == 'y' || ans == 'Y') {
+				GuestChoice();
+			} else if (ans == 'n' || ans == 'N') {
+
+				selectUser();
+			} else {
+				System.out.println("Please enter valid input...");
+
+				selectUser();
+
+			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
-		selectUser();		
+		selectUser();
 	}
 
 }
